@@ -22,41 +22,27 @@ assets are downloaded. Those figures are his, not mine, and I haven't verified t
 - Original playable artifact: https://claude.ai/artifact/BGY1SztrAYcJQHSsnHHGmp
 - Upstream mirror this repo was cloned from: https://github.com/realcodebear/saltline-fable-5.2
 
-**This repository is an attributed mirror, hosted so the game is easy to play.** It is free, carries
-no advertising, no analytics and no tracking, and is not monetized. The game is not under an
-open-source license — please read [`COPYRIGHT.md`](COPYRIGHT.md) before reusing anything from it.
-It comes down on request from the original author.
+This repo is an attributed mirror, hosted so the game is easy to play — free, no ads, no analytics,
+no tracking. **The game is not open source**: see [`COPYRIGHT.md`](COPYRIGHT.md) before reusing
+anything from it. It comes down on request from the original author.
 
-## What I changed, and why
+## What I changed
 
-The game logic is untouched. Every change is in packaging — and each one is verifiable with a diff
-against `upstream/main`:
+The game logic is untouched — every change is packaging, and all of it is verifiable with a diff:
 
-**1. Restored the three.js license notice.** three.js r180 is bundled, minified, inside the inline
-`<script>`. I searched the whole 1.4 MB for a copyright or license header and found **none** —
-neither the original artifact nor the upstream mirror carries one. The MIT License requires its
-notice to be included in all copies, so redistributing the file without it is non-compliant. The
-notice now lives in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+- **Restored the three.js MIT notice.** r180 is bundled minified in `index.html` with no copyright
+  or license header anywhere in the 1.4 MB — I checked. MIT requires that notice in every copy. It
+  now lives in [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+- **Self-hosted the fonts.** Upstream fetched them from the Google Fonts CDN at runtime, sending
+  every visitor's IP to Google. Now served from `fonts/`, so **the page makes zero third-party
+  requests** and works offline.
+- **Added page metadata and a favicon** — description, canonical, Open Graph / Twitter tags, so
+  shared links render a preview. The metadata credits the original author.
+- **Added [`vercel.json`](vercel.json)** — `nosniff`, `no-referrer`, a restrictive
+  `Permissions-Policy`, and immutable caching on the fonts.
 
-**2. Self-hosted the fonts, removing the only third-party request.** Upstream pulled three families
-from the Google Fonts CDN at runtime, which sends every visitor's IP address to Google — the issue
-behind the 2022 Munich regional court ruling on dynamic Google Fonts embedding. The `latin` and
-`latin-ext` subsets are now served from `fonts/` (16 files, ~300 KB). Only `·` and `—` appear as
-non-ASCII characters anywhere in the game, so the Cyrillic and Vietnamese subsets were dropped.
-
-**The page now makes zero third-party requests.** It also works fully offline.
-
-**3. Added page metadata.** Description, canonical URL, theme colour and Open Graph / Twitter card
-tags, so shared links render a preview. Authorship in the metadata credits the original author.
-
-**4. Added deployment config.** [`vercel.json`](vercel.json) sets `nosniff`, `Referrer-Policy:
-no-referrer`, a restrictive `Permissions-Policy`, revalidation on the HTML and a one-year immutable
-cache on the fonts.
-
-### The game code is provably unmodified
-
-Changes are confined to the `<head>`. Everything from `<script>` onward is byte-identical to
-upstream — I verified this by comparing a SHA-256 of the bundle before and after each edit. To check
+Changes are confined to the `<head>`: 19 lines added, 2 removed. Everything from `<script>` onward
+is byte-identical to upstream, verified by SHA-256 of the bundle before and after each edit. Check
 for yourself:
 
 ```sh
