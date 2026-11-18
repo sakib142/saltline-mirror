@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="5" fill="#0b0d0f"/>
+  <!-- three uplink relays: the objective, and the only thing legible at 16px -->
+  <rect x="6"  y="8" width="4" height="16" fill="#ffb347"/>
+  <rect x="14" y="8" width="4" height="16" fill="#ffb347"/>
+  <rect x="22" y="8" width="4" height="16" fill="#d2622a"/>
+</svg>
