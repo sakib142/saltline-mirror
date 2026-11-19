@@ -61,4 +61,5 @@ Upstream loaded these from the Google Fonts CDN at runtime. They are self-hosted
 ## The game itself
 
 Not third-party software in the usual sense, and **not covered by any of the licenses above**.
-See [`COPYRIGHT.md`](COPYRIGHT.md).
+The game originates with its own author and is not under an open-source licence; the notices here
+cover only the bundled three.js and the fonts.
